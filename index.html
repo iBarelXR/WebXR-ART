@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebXR Painting Replacement</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@decentraland/webxr-boilerplate@latest/webxr-boilerplate.min.js"></script>
-</head>
-<body>
-    <a-scene xr-mode-ui="enabled: false" renderer="colorManagement: true;">
-        <!-- Enable passthrough -->
-        <a-entity camera position="0 1.6 0" look-controls></a-entity>
+    <style>
+      body { margin: 0; background: transparent; }
+      canvas { background-color: transparent !important; }
+    </style>
+  </head>
+  <body>
+    <a-scene vr-mode-ui="enabled: true" embedded background="transparent: true">
+      <!-- Camera -->
+      <a-entity camera look-controls wasd-controls position="0 1.6 0"></a-entity>
 
-        <!-- Clickable placeholder for the painting replacement -->
-        <a-plane id="painting" position="0 1.5 -2" width="1" height="1.5" color="white" material="shader: flat; src: #monaLisa"></a-plane>
-        
-        <!-- Mona Lisa texture -->
-        <a-assets>
-            <img id="monaLisa" src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg">
-        </a-assets>
+      <!-- Painting -->
+      <a-plane 
+        id="painting" 
+        position="0 1.5 -2" 
+        width="1" 
+        height="1.5" 
+        material="src: #monaLisa; shader: flat;"
+      ></a-plane>
 
-        <script>
-            document.querySelector('#painting').addEventListener('click', function () {
-                this.setAttribute('material', 'src', '#monaLisa');
-            });
-        </script>
+      <!-- Assets -->
+      <a-assets>
+        <img id="monaLisa" src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg">
+      </a-assets>
     </a-scene>
-</body>
+  </body>
 </html>
-
